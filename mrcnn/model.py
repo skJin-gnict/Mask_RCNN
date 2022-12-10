@@ -2354,6 +2354,9 @@ class MaskRCNN(object):
         else:
             workers = multiprocessing.cpu_count()
 
+        # Multiprocessing failed on Colab
+        workers = 0
+
         self.keras_model.fit(
             train_generator,
             initial_epoch=self.epoch,
