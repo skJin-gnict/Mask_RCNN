@@ -1,4 +1,5 @@
 # Data files and directories common in repo root
+.DS_Store
 datasets/
 logs/
 *.h5
