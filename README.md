@@ -6,6 +6,17 @@
 
 [Colab Notebook](https://colab.research.google.com/drive/1e05Hw_21zl2SgcJ2clE2mWJ1wcoMXUp4?usp=sharing)
 
+## 자율주행 주차공간 탐색
+
+<video src="https://user-images.githubusercontent.com/5242555/218378705-6b285a69-cbe8-47ef-a4b6-b974f0233ae3.webm" width="800" controls></video>
+
+- 주차 공간 탐색을 위한 차량 관점 복합 데이터 (AI허브)
+    - https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100
+
+[Colab Notebook](https://colab.research.google.com/drive/1-WdZwVk2NoP4ZbwBrOAqtjcVUN2cv7oQ?usp=sharing)
+
+[Pretrained models](https://drive.google.com/drive/folders/1JgXNalzCuEvx4WlXmUqEtJE89xGmJnX_?usp=share_link)
+
 ### YouTube [빵형의 개발도상국](https://www.youtube.com/@bbanghyong)
 
 ---
