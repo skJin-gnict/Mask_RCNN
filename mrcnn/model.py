@@ -1936,9 +1936,8 @@ class MaskRCNN(object):
 
                 def call(self, input):
                     return self.x
-
+            anchors = tf.constant(anchors, name="anchors")
             #anchors = ConstLayer(anchors, name="anchors")(input_image)
-	    anchors = tf.constant(anchors, name="anchors")
 	#Error now
         else:
             anchors = input_anchors
