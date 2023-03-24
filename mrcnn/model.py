@@ -1936,8 +1936,8 @@ class MaskRCNN(object):
 
                 def call(self, input):
                     return self.x
-            anchors = tf.constant(anchors, name="anchors")
-            #anchors = ConstLayer(anchors, name="anchors")(input_image)
+
+            anchors = ConstLayer(anchors, name="anchors")(input_image)
 	
         else:
             anchors = input_anchors
@@ -2104,6 +2104,7 @@ class MaskRCNN(object):
         the addition of multi-GPU support and the ability to exclude
         some layers from loading.
         exclude: list of layer names to exclude
+	Error now
         """
         import h5py
         from tensorflow.python.keras.saving import hdf5_format
@@ -2177,8 +2178,7 @@ class MaskRCNN(object):
             keras.regularizers.l2(self.config.WEIGHT_DECAY)(w) / tf.cast(tf.size(input=w), tf.float32)
             for w in self.keras_model.trainable_weights
             if 'gamma' not in w.name and 'beta' not in w.name]
-	#error now
-	print(reg_losses)
+        print(reg_losses)
         self.keras_model.add_loss(tf.add_n(reg_losses))
 
         # Compile
