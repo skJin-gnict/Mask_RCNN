@@ -1937,7 +1937,9 @@ class MaskRCNN(object):
                 def call(self, input):
                     return self.x
 
-            anchors = ConstLayer(anchors, name="anchors")(input_image)
+            #anchors = ConstLayer(anchors, name="anchors")(input_image)
+	    anchors = tf.constant(anchors, name="anchors")
+	#Error now
         else:
             anchors = input_anchors
 
@@ -2098,11 +2100,12 @@ class MaskRCNN(object):
         checkpoint = os.path.join(dir_name, checkpoints[-1])
         return checkpoint
 
-    def load_weights(self, filepath, by_name=False, exclude=None):
+    def load_weights(self, filepath, by_name=False, exclude=None): 
         """Modified version of the corresponding Keras function with
         the addition of multi-GPU support and the ability to exclude
         some layers from loading.
         exclude: list of layer names to exclude
+	Error now
         """
         import h5py
         from tensorflow.python.keras.saving import hdf5_format
