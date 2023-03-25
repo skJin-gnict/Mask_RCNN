@@ -2178,7 +2178,7 @@ class MaskRCNN(object):
             keras.regularizers.l2(self.config.WEIGHT_DECAY)(w) / tf.cast(tf.size(input=w), tf.float32)
             for w in self.keras_model.trainable_weights
             if 'gamma' not in w.name and 'beta' not in w.name]
-        print("trainable_weights:",self.keras_model.trainable_weights)
+        print(self.keras_model.trainable_weights)
         print(reg_losses)
         self.keras_model.add_loss(tf.add_n(reg_losses))
 
@@ -2349,6 +2349,7 @@ class MaskRCNN(object):
         log("\nStarting at epoch {}. LR={}\n".format(self.epoch, learning_rate))
         log("Checkpoint Path: {}".format(self.checkpoint_path))
         self.set_trainable(layers)
+        print("layers:",layers)
         self.compile(learning_rate, self.config.LEARNING_MOMENTUM)
 
         # Work-around for Windows: Keras fails on Windows when using
