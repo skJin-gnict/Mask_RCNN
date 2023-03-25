@@ -1847,12 +1847,14 @@ class MaskRCNN(object):
             raise Exception("Image size must be dividable by 2 at least 6 times "
                             "to avoid fractions when downscaling and upscaling."
                             "For example, use 256, 320, 384, 448, 512, ... etc. ")
-
+        print("w,h",h,w)
         # Inputs
         input_image = KL.Input(
             shape=[None, None, config.IMAGE_SHAPE[2]], name="input_image")
+        
         input_image_meta = KL.Input(shape=[config.IMAGE_META_SIZE],
                                     name="input_image_meta")
+        print("image_meta", input_image_meta)
         if mode == "training":
             # RPN GT
             input_rpn_match = KL.Input(
