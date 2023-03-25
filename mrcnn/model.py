@@ -1859,22 +1859,17 @@ class MaskRCNN(object):
                 shape=[None, 1], name="input_rpn_match", dtype=tf.int32)
             input_rpn_bbox = KL.Input(
                 shape=[None, 4], name="input_rpn_bbox", dtype=tf.float32)
-            print("rpn_match:",input_rpn_match)
-            print("rpn_bbox",input_rpn_bbox)
             # Detection GT (class IDs, bounding boxes, and masks)
             # 1. GT Class IDs (zero padded)
             input_gt_class_ids = KL.Input(
                 shape=[None], name="input_gt_class_ids", dtype=tf.int32)
-            print("classid",input_gt_class_ids)
             # 2. GT Boxes in pixels (zero padded)
             # [batch, MAX_GT_INSTANCES, (y1, x1, y2, x2)] in image coordinates
             input_gt_boxes = KL.Input(
                 shape=[None, 4], name="input_gt_boxes", dtype=tf.float32)
-            print("classid",input_gt_boxes)
             # Normalize coordinates
             gt_boxes = KL.Lambda(lambda x: norm_boxes_graph(
                 x, K.shape(input_image)[1:3]))(input_gt_boxes)
-            print("gt_boxes",gt_boxes)
             # 3. GT Masks (zero padded)
             # [batch, height, width, MAX_GT_INSTANCES]
             if config.USE_MINI_MASK:
@@ -1886,6 +1881,7 @@ class MaskRCNN(object):
                 input_gt_masks = KL.Input(
                     shape=[config.IMAGE_SHAPE[0], config.IMAGE_SHAPE[1], None],
                     name="input_gt_masks", dtype=bool)
+            print(input_gt_masks)
             
         elif mode == "inference":
             # Anchors in normalized coordinates
