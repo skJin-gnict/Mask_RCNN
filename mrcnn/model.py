@@ -1948,7 +1948,7 @@ class MaskRCNN(object):
                               len(config.RPN_ANCHOR_RATIOS), config.TOP_DOWN_PYRAMID_SIZE)
         # Loop through pyramid layers
         layer_outputs = []  # list of lists
-        print(layer_outputs)
+        
         for p in rpn_feature_maps:
             layer_outputs.append(rpn([p]))
         # Concatenate layer outputs
@@ -1962,7 +1962,7 @@ class MaskRCNN(object):
                    for o, n in zip(outputs, output_names)]
 
         rpn_class_logits, rpn_class, rpn_bbox = outputs
-        print(outputs)
+        
         # Generate proposals
         # Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates
         # and zero padded.
@@ -1973,6 +1973,8 @@ class MaskRCNN(object):
             nms_threshold=config.RPN_NMS_THRESHOLD,
             name="ROI",
             config=config)([rpn_class, rpn_bbox, anchors])
+        print("propasal",proposal_count)
+        print("rpn_rois",rpn_rois)
 
         if mode == "training":
             # Class ID mask to mark class IDs supported by the dataset the image
