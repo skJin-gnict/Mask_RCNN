@@ -2014,11 +2014,10 @@ class MaskRCNN(object):
                                               config.MASK_POOL_SIZE,
                                               config.NUM_CLASSES,
                                               train_bn=config.TRAIN_BN)
-            print(mrcnn_class_logits, mrcnn_class, mrcnn_bbox )
-            print(mrcnn_mask)
+            
             # TODO: clean up (use tf.identify if necessary)
             output_rois = KL.Lambda(lambda x: x * 1, name="output_rois")(rois)
-            print(output_rois)
+            
             # Losses
             rpn_class_loss = KL.Lambda(lambda x: rpn_class_loss_graph(*x), name="rpn_class_loss")(
                 [input_rpn_match, rpn_class_logits])
@@ -2073,7 +2072,7 @@ class MaskRCNN(object):
         if config.GPU_COUNT > 1:
             from mrcnn.parallel_model import ParallelModel
             model = ParallelModel(model, config.GPU_COUNT)
-
+        print(model)
         return model
 
     def find_last(self):
