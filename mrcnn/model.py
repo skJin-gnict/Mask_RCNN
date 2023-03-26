@@ -1881,7 +1881,7 @@ class MaskRCNN(object):
                 input_gt_masks = KL.Input(
                     shape=[config.IMAGE_SHAPE[0], config.IMAGE_SHAPE[1], None],
                     name="input_gt_masks", dtype=bool)
-            print(input_gt_masks)
+            
             
         elif mode == "inference":
             # Anchors in normalized coordinates
@@ -1948,6 +1948,7 @@ class MaskRCNN(object):
                               len(config.RPN_ANCHOR_RATIOS), config.TOP_DOWN_PYRAMID_SIZE)
         # Loop through pyramid layers
         layer_outputs = []  # list of lists
+        print(layer_outputs)
         for p in rpn_feature_maps:
             layer_outputs.append(rpn([p]))
         # Concatenate layer outputs
@@ -1956,11 +1957,12 @@ class MaskRCNN(object):
         # e.g. [[a1, b1, c1], [a2, b2, c2]] => [[a1, a2], [b1, b2], [c1, c2]]
         output_names = ["rpn_class_logits", "rpn_class", "rpn_bbox"]
         outputs = list(zip(*layer_outputs))
+        
         outputs = [KL.Concatenate(axis=1, name=n)(list(o))
                    for o, n in zip(outputs, output_names)]
 
         rpn_class_logits, rpn_class, rpn_bbox = outputs
-
+        print(outputs)
         # Generate proposals
         # Proposals are [batch, N, (y1, x1, y2, x2)] in normalized coordinates
         # and zero padded.
