@@ -1973,8 +1973,7 @@ class MaskRCNN(object):
             nms_threshold=config.RPN_NMS_THRESHOLD,
             name="ROI",
             config=config)([rpn_class, rpn_bbox, anchors])
-        print("propasal",proposal_count)
-        print("rpn_rois",rpn_rois)
+    
 
         if mode == "training":
             # Class ID mask to mark class IDs supported by the dataset the image
@@ -1982,6 +1981,7 @@ class MaskRCNN(object):
             active_class_ids = KL.Lambda(
                 lambda x: parse_image_meta_graph(x)["active_class_ids"]
                 )(input_image_meta)
+            print("active class id",active_class_ids)
 
             if not config.USE_RPN_ROIS:
                 # Ignore predicted ROIs and use ROIs provided as an input.
@@ -1992,6 +1992,7 @@ class MaskRCNN(object):
                     x, K.shape(input_image)[1:3]))(input_rois)
             else:
                 target_rois = rpn_rois
+            print("input_rois",input_rois)
 
             # Generate detection targets
             # Subsamples proposals and generates target outputs for training
