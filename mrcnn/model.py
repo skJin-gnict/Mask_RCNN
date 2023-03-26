@@ -2072,7 +2072,6 @@ class MaskRCNN(object):
         if config.GPU_COUNT > 1:
             from mrcnn.parallel_model import ParallelModel
             model = ParallelModel(model, config.GPU_COUNT)
-        print(model)
         return model
 
     def find_last(self):
@@ -2315,7 +2314,7 @@ class MaskRCNN(object):
             defined in the Dataset class.
         """
         assert self.mode == "training", "Create model in training mode."
-
+        # error now
         # Pre-defined layer regular expressions
         layer_regex = {
             # all layers but the backbone
@@ -2329,12 +2328,13 @@ class MaskRCNN(object):
         }
         if layers in layer_regex.keys():
             layers = layer_regex[layers]
-
+        print(layers)
         # Data generators
         train_generator = DataGenerator(train_dataset, self.config, shuffle=True,
                                          augmentation=augmentation)
         val_generator = DataGenerator(val_dataset, self.config, shuffle=True)
-
+        print("train_gen",train_generator)
+        print("val_gen",val_generator)
         # Create log_dir if it does not exist
         if not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
